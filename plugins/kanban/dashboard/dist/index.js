@@ -1551,9 +1551,8 @@
             h(Select, {
               value: settings.orchestrator_profile || "",
               className: "h-8",
-              onChange: function (e) {
-                const v = (e && e.target ? e.target.value : e) || "";
-                saveSettings({ orchestrator_profile: v });
+              onValueChange: function (v) {
+                saveSettings({ orchestrator_profile: v || "" });
               },
             },
               h(SelectOption, { value: "" },
@@ -1569,9 +1568,8 @@
             h(Select, {
               value: settings.default_assignee || "",
               className: "h-8",
-              onChange: function (e) {
-                const v = (e && e.target ? e.target.value : e) || "";
-                saveSettings({ default_assignee: v });
+              onValueChange: function (v) {
+                saveSettings({ default_assignee: v || "" });
               },
             },
               h(SelectOption, { value: "" },
@@ -2029,7 +2027,7 @@
                  title: "Reassign selected tasks to a different Hermes profile. Pick a profile (or unassign) and click Apply." },
         h(Select, {
           value: assignee,
-          onChange: function (e) { setAssignee(e.target.value); },
+          onValueChange: function (v) { setAssignee(v == null ? "" : v); },
           className: "h-7 text-xs",
         },
           h(SelectOption, { value: "" }, "— reassign —"),
@@ -2544,7 +2542,7 @@
       h("div", { className: "flex gap-2" },
         h(Select, {
           value: workspaceKind,
-          onChange: function (e) { setWorkspaceKind(e.target.value); },
+          onValueChange: function (v) { setWorkspaceKind(v == null ? "" : v); },
           title: "scratch: isolated temp dir (default). worktree: git worktree on the assignee profile. dir: exact path (required below).",
           className: "h-7 text-xs w-28",
         },
@@ -2561,7 +2559,7 @@
       ),
       h(Select, {
         value: parent,
-        onChange: function (e) { setParent(e.target.value); },
+        onValueChange: function (v) { setParent(v == null ? "" : v); },
         className: "h-7 text-xs",
         title: "Optional parent task. A child stays blocked in its current column until the parent is marked done.",
       },
